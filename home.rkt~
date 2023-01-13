@@ -1,0 +1,16 @@
+#lang racket
+
+(provide doc-side)
+(define (doc-side . parts) `(div ((id "sidebar-right")) ,@parts))
+
+(provide doc-main)
+(define (doc-main . parts) `(div ((id "content")) ,@parts))
+
+(provide ext-link)
+(define (ext-link site username link)
+  `((dt ,site) (dd (a ((href ,link) (align "right")) ,username))))
+(provide ext-links)
+(define (ext-links . links)
+  `(d1 ((class "external-links"))
+       ,@(apply append (map (lambda (l) (apply ext-link l) ) links))
+       ))
